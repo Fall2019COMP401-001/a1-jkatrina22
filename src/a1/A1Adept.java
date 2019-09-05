@@ -66,8 +66,8 @@ public class A1Adept {
 		String mostSpent = String.format("%.2f", biggest.amount);
 		String leastSpent = String.format("%.2f", smallest.amount);
 		String average = String.format("%.2f", (overallTotal/numberOfCustomers));
-		System.out.println("Biggest: " + biggest.name + " (" + biggest.amount + ")");
-		System.out.println("Smallest: " + smallest.name + "(" + smallest.amount + ")");
+		System.out.println("Biggest: " + biggest.name + " (" + mostSpent + ")");
+		System.out.println("Smallest: " + smallest.name + "(" + leastSpent + ")");
 		System.out.println("Average: " + average);
 		
 	}
