@@ -35,9 +35,11 @@ public class A1Novice {
 				total += (quantityBought[x] * price[x]);
 			}	
 			
+			String twoDecimalPrice = String.format("%.2f", total);
+			
 			
 			System.out.println(firstName[i].charAt(0)+". "+
-			lastName[i]+": "+total);
+			lastName[i]+": "+ twoDecimalPrice);
 		}
 		
 	
