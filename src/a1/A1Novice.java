@@ -8,161 +8,45 @@ public class A1Novice {
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
 		// Your code follows here.
-		int customer = scan.nextInt();
-		for(int i = 0; i < customer; i++) {
-			scanCustomer();
+		int numberOfCustomers;
+		String[] firstName;
+		String[] lastName;
+		int numberBought;
+		int[] quantityBought;
+		String itemName;
+		double[] price;
+		double total;
+
+		numberOfCustomers = scan.nextInt();
+		firstName = new String[numberOfCustomers];
+		lastName = new String[numberOfCustomers];
+		for (int i=0; i<numberOfCustomers; i++) {
+			firstName[i] = scan.next();
+			lastName[i] = scan.next();
+			numberBought = scan.nextInt();
+				
+			quantityBought = new int[numberBought];
+			price = new double[numberBought];
+			total = 0;
+			for (int x=0; x<numberBought; x++) {
+				quantityBought[x] = scan.nextInt();
+				itemName = scan.next();
+				price[x] = scan.nextDouble();
+				total += (quantityBought[x] * price[x]);
+			}	
+			
+			
+			System.out.println(firstName[i].charAt(0)+". "+
+			lastName[i]+": "+total);
 		}
+		
+	
+		
 		scan.close();
 	}
-	
-	static void scanCustomer() {
-		Scanner scan = new Scanner(System.in);
-		String firstName = scan.next();
-		String lastName = scan.next();
-		char initial = firstName.charAt(0);
-		// System.out.println(initial + ". " + lastName);
-		
-		int numberOfItems = scan.nextInt();
-		double total = 0;
-		for (int i = 0; i < numberOfItems; i++) {
-			int howMany = scan.nextInt();
-			// System.out.println(howMany);
-			
-			String itemName = scan.next();
-			double itemPrice = scan.nextDouble();
-			// System.out.println(itemName + " " + itemPrice);
-			total +=  howMany * itemPrice;
-		}
-		System.out.println(initial + ". " + lastName + ": " + total);
-		//scan.close();
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-	}
 }
+
+
+
+
+
