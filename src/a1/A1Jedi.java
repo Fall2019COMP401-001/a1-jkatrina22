@@ -9,79 +9,70 @@ public class A1Jedi {
 		Scanner scan = new Scanner(System.in);
 
 		// Your code follows here.
-		int numberOfItems = scan.nextInt();
-		String[] itemNames = new String[numberOfItems];
-		double[] itemPrices = new double[numberOfItems];
+		int numberOfIngredients= scan.nextInt();
 		
+		int[] calsPerOz = new int[numberOfIngredients];
+		String[] ingredientName = new String[numberOfIngredients];
+		double[] pricePerOz = new double[numberOfIngredients];
+		boolean[] vegetarian = new boolean[numberOfIngredients];
 		
+		for (int i = 0; i < numberOfIngredients; i++) {
+			ingredientName[i] = scan.next();
+			pricePerOz[i] = scan.nextDouble();
+			vegetarian[i] = scan.nextBoolean();
+			calsPerOz[i] = scan.nextInt();
+		}	
 		
-		for (int i = 0; i < numberOfItems; i++) {
-			itemNames[i] = scan.next();
-			itemPrices[i] = scan.nextDouble();
-		}
+		int numberOfRecipes = scan.nextInt();
+		String[] menu = new String[numberOfRecipes];
+		double[][] recipeIngredients = new double[numberOfRecipes][numberOfIngredients];
 		
-		int numberOfCustomers = scan.nextInt();
-		String[] customerNames = new String[numberOfCustomers];
-		int[] numberItemsBought = new int[numberOfItems];
-		int[] numberPerItem = new int[numberOfItems];
+		for (int i = 0; i < numberOfRecipes; i++) {
+			menu[i] = scan.next();
+			int numberOfRecipeIngredients = scan.nextInt();
+			String[] ingredients = new String[numberOfRecipeIngredients];
+			// amtNeeded[i] = scan.nextDouble();
+
 		
-		for (int i = 0; i < numberOfCustomers; i++) {
-			customerNames[i] = scan.next();
-			customerNames[i] += " " + scan.next();
-			int totalNumberItemsBought = scan.nextInt();
-			String[] doubleCheck = new String[totalNumberItemsBought];
-			
-			for (int x = 0; x < totalNumberItemsBought; x++) {
-				int amt = scan.nextInt();
-				String nameOfItems = scan.next();
-				
-				for (int y = 0; y < amt; y++) {
-					totalAmtItems(itemNames, nameOfItems, 
-							numberItemsBought);
+			for (int j = 0; j < numberOfRecipeIngredients; j++) {
+				ingredients[j] = scan.next();
+				int arr = 0;
+				int k = 0;
+				for (k = 0; k < numberOfIngredients; k++) {
+					if(ingredients[j].equals(ingredientName[k])) {
+						break;
+					}
 				}
-				if (checkRepeat(doubleCheck, nameOfItems)) {
-					totalAmtItems(itemNames, nameOfItems, 
-							numberPerItem);
-				}
-				
-				doubleCheck[x] = nameOfItems;
+				recipeIngredients[i][k] = scan.nextDouble();
 			}
+		}
+		
+		int orderNumber[] = new int[numberOfRecipes];
+		String menuItem = "";
 			
-		}
-		scan.close();
-		print(itemNames, numberItemsBought, numberPerItem);
-	}
-	
-	public static boolean checkRepeat(String[] arr, String itemName) {
-		for (int i = 0; i < arr.length; i++) {
-			if (arr[i] == null) {
-				return true;
-			}
-			if (arr[i].equals(itemName)) {
-				return false;
+		while (!menuItem.equals("EndOrder")) {
+			menuItem = scan.next();
+			for (int i = 0; i < numberOfRecipes; i++) {
+				if (menuItem.equals(menu[i])) {
+					orderNumber[i]++;
+				}
 			}
 		}
-		return true;
-	}
-	
-	public static void print(String[] arr, int[] amt,
-			int[] customers) {
-		for (int i = 0; i < arr.length; i++) {
-			if (customers[i] == 0) {
-				System.out.println("No customers bought " + arr[i]);
-			} else {
-				System.out.println(customers[i] + " customers bought "
-			+ amt[i] + " " + arr[i]);
+		
+		double amtNeeded [] = new double[numberOfIngredients];
+		
+		for (int i = 0; i < numberOfRecipes; i++) {
+			for (int j = 0; j < numberOfIngredients; j++) {
+				amtNeeded[j] += recipeIngredients[i][j] * orderNumber[i];
 			}
 		}
-	}
-	
-	public static void totalAmtItems(String[] arr, String item, 
-			int[] amt) {
-		for (int i =0; i < arr.length; i ++) {
-			if (arr[i].equals(item)) {
-				amt[i]++;
-			}
+		System.out.println("This order will require:");
+		for (int i = 0; i < numberOfIngredients; i++) {
+			System.out.println(String.format("%.2f", amtNeeded[i]) + " ounces of " + ingredientName[i]);
 		}
+		
 	}
+					
 }
+
+
